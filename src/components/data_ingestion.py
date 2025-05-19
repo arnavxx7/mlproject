@@ -49,5 +49,7 @@ if __name__=="__main__":
     data_transformation = DataTransformation()
     train_arr, test_arr, prep_obj = data_transformation.initiate_data_transformation(train_path, test_path)
     model_trainer = ModelTrainer()
-    print(model_trainer.initiate_model_trainer(train_arr, test_arr))
+    score, model_name = model_trainer.initiate_model_trainer(train_arr, test_arr)
+    print(f"Best model = {model_name}")
+    print(f"Accuracy = {score}")
 

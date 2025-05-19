@@ -44,8 +44,33 @@ class ModelTrainer:
                         "AdaBoost Regressor": AdaBoostRegressor(),
                         "Gradient Boosting Regressor":GradientBoostingRegressor()
                     }
+            
+            params = {
+                "Linear Regression": {},
+                "K-Neighbors Regressor":{
+                    "n_neighbors":[5,7,9,11]
+                },
+                "Decision Tree": {
+                    "criterion":["squared_error", "friedman_mse", "absolute_error", "poisson"]
+                },
+                "Random Forest Regressor": {
+                    "n_estimators":[8,16,24,48,64]
+                },
+                "XGBRegressor":{
+                    "learning_rate":[0.1, 0.01, 0.05, 0.001]
+                },
+                "CatBoosting Regressor":{
+                    "depth":[6,8,10]
+                },
+                "AdaBoost Regressor":{
+                    "learning_rate":[0.1, 0.01, 0.05, 0.001]
+                },
+                "Gradient Boosting Regressor": {
+                    "learning_rate":[0.1, 0.01, 0.05, 0.001]
+                },
+            }
             logging.info("Training all models and evaluating them")
-            model_report:dict=evaluate_model(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            model_report:dict=evaluate_model(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models, param=params)
 
             # Get the best model score from dict
 
@@ -75,6 +100,6 @@ class ModelTrainer:
 
             best_r2_score = r2_score(y_test, y_pred)
 
-            return best_r2_score
+            return best_r2_score, best_model_name
         except Exception as e:
             raise CustomException(e, sys)
