@@ -2,9 +2,7 @@ numpy
 pandas
 seaborn
 matplotlib
-scikit-learn
 catboost
-dill
 setuptools
 flask
 #-e .
